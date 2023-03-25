@@ -1,0 +1,64 @@
+:root {
+  --color-text: #ccc;
+  --height: 50px;
+  --width-global: 1400px;
+  --height-logo: 35px;
+}
+//header
+.header {
+  box-shadow: 0 1px 2px 0 #ccc;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #fff;
+  z-index: 99;
+  .header-global {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--height);
+    max-width: var(--width-global);
+    margin: 0 auto;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+  }
+  .header-logo img {
+    height: 30px;
+  }
+  .header-search {
+    padding-left: 20px;
+  }
+  .ant-input-group-wrapper.ant-input-search.header-search {
+    width: 350px !important;
+  }
+  .header-user {
+    height: var(--height-logo);
+    img {
+      height: var(--height-logo);
+      width: var(--height-logo);
+      border-radius: 50%;
+    }
+  }
+}
+
+.login {
+  margin: 30vh auto;
+  background-color: #cccccc85;
+  max-width: 35rem;
+  padding: 10px 0;
+  border-radius: 10px;
+
+  .login-text {
+    margin: 10px 0;
+  }
+}
+
+.home {
+  max-width: var(--width-global);
+  margin: var(--height) auto 0;
+  height: calc(100vh - var(--height));
+}

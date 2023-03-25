@@ -1,0 +1,40 @@
+.navbar {
+  padding-top: 20px;
+  text-align: left;
+  background-color: #0c2d48;
+  height: calc(100vh - var(--height));
+
+  .navbar-friend__span {
+    font-size: 1.9rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #fff;
+    padding-left: 10px;
+  }
+  .navbar-friend__span:hover {
+    color: rgba(224, 71, 24, 0.746);
+  }
+  .navbar-list {
+    padding-top: 10px;
+  }
+  .navbar-list__span {
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #fff;
+    padding-left: 10px;
+  }
+  .navbar-list ul {
+    list-style: none;
+  }
+  .navbar-list li {
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 1.6rem;
+    padding-left: 10px;
+  }
+  .navbar-list li:hover {
+    background-color: #201933cc;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,99 @@
+:root {
+  --height: 50px;
+  --height-logo: 35px;
+}
+.messenger {
+  // css header meesenger
+  .messenger-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--height);
+    border-bottom: 1px solid #ccc;
+
+    .messenger-header__noti {
+      text-align: left;
+      padding-left: 10px;
+    }
+    .messenger-header__noti p:nth-child(1) {
+      font-weight: 600;
+    }
+    .messenger-header__noti p {
+      font-size: 1.5rem;
+    }
+
+    .messenger-header__friend {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // css messenger container
+  .messenger-container {
+    height: calc(100vh - 3 * var(--height));
+    overflow-y: scroll;
+  }
+
+  // css footer
+  .messenger-zoom__footer {
+    display: flex;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    z-index: 5;
+    width: 100%;
+    form {
+      width: 90% !important;
+    }
+    input {
+      width: 100% !important;
+      font-size: 1.5rem;
+      border: none;
+      margin: 0 10px;
+      border-radius: 20px;
+    }
+    input:focus {
+      box-shadow: none;
+    }
+  }
+
+  //css messs
+
+  .messenger-user {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    align-items: center;
+
+    .messenger-user-icon {
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    .messenger-user-contai {
+      text-align: left;
+      background-color: #0084ff2b;
+      border-radius: 10px;
+      margin: 0 8px;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      p:nth-child(1) {
+        font-weight: 600;
+      }
+      p {
+        font-size: 1.4rem;
+      }
+      span {
+        font-size: 1.2rem;
+        color: blue;
+      }
+    }
+
+    .image-icon {
+      height: var(--height-logo);
+      width: var(--height-logo);
+      border-radius: 50%;
+      margin: 0 8px;
+    }
+  }
+}

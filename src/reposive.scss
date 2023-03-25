@@ -1,0 +1,14 @@
+// @media screen and (max-width: 1400px) {
+//   .col-gird {
+//     padding: 0 10px;
+//   }
+// }
+
+@media screen and (max-width: 576px) {
+  .header-global {
+    padding: 0 10px;
+  }
+  .header-search {
+    display: none;
+  }
+}
