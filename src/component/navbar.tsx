@@ -1,6 +1,10 @@
 import { useEffect } from "react";
-import { PlusCircleOutlined } from "@ant-design/icons";
-import { Modal, Input } from "antd";
+import {
+  PlusCircleOutlined,
+  CommentOutlined,
+  EllipsisOutlined,
+} from "@ant-design/icons";
+import { Modal, Input, Button, Dropdown, Avatar, Tooltip } from "antd";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hookReudx";
 import { addRoom, getdetailRoom, getRooms } from "../redux/reducer";
@@ -14,14 +18,32 @@ export default function Navbar() {
 
   const users = useAppSelector((state) => state.chatRoom.users);
   const listRoom = useAppSelector((state) => state.chatRoom.chatRoom);
+  const detailRoom = useAppSelector((state) => state.chatRoom.detailRoom);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const [nameRoom, setNameRoom] = useState<string>("");
   const [titleRoom, setTitleRoom] = useState<string>("");
+
+  const { Search } = Input;
 
   const showModal = () => {
     setIsModalOpen(true);
   };
+
+  const items: { key: string; label: string }[] = [
+    {
+      key: "1",
+      label: "Tạo phòng",
+    },
+  ];
+
+  const recall: { key: string; label: string }[] = [
+    {
+      key: "1",
+      label: "Rời phòng",
+    },
+  ];
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "Room"), (listRooms) => {
@@ -72,21 +94,79 @@ export default function Navbar() {
       }
     });
   };
+
   return (
     <>
       <div className="navbar">
         <div className="navbar-friend">
-          <span className="navbar-friend__span" onClick={showModal}>
-            Tạo phòng: <PlusCircleOutlined />
-          </span>
+          <div className="navbar-flex">
+            <Search
+              placeholder="Tìm kiếm"
+              className="header-search"
+              // onSearch={onSearch}
+            />
+            <Button
+              type="text"
+              className="navbar-friend__span"
+              onClick={showModal}
+            >
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                <PlusCircleOutlined />
+              </Dropdown>
+            </Button>
+          </div>
+          <span className="navbar-list__span">Tất cả</span>
         </div>
         <div className="navbar-list">
-          <span className="navbar-list__span">Danh sách phòng:</span>
           <ul>
-            {listRoom.map((room) => {
+            {listRoom?.map((room) => {
               return (
-                <li key={room.id} onClick={() => handleDetailRoom(room.id)}>
-                  {room.nameRoom}
+                <li
+                  className="navbar-room"
+                  key={room.id}
+                  style={
+                    detailRoom.id === room.id
+                      ? { backgroundColor: "#e5efff" }
+                      : {}
+                  }
+                  onClick={() => {
+                    handleDetailRoom(room.id);
+                  }}
+                >
+                  <div className="navbar-room">
+                    <div style={{ width: "56px" }}>
+                      <Avatar.Group
+                        maxCount={1}
+                        size={room?.roomFriend.length > 1 ? "default" : "large"}
+                        maxStyle={{
+                          color: "#f56a00",
+                          backgroundColor: "#fde3cf",
+                        }}
+                      >
+                        {room?.roomFriend.map((friend: any, index: number) => {
+                          return (
+                            <Avatar key={index} src={friend.image}></Avatar>
+                          );
+                        })}
+                      </Avatar.Group>
+                    </div>
+                    <div className="navbar-room__titile">
+                      <span className="navbar-room__titile-span">
+                        {room.nameRoom}
+                      </span>
+                      <span className="navbar-room__titile-span">
+                        <CommentOutlined style={{ padding: "0 4px 0 0" }} />
+                        {room.titleRoom}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <EllipsisOutlined style={{ fontSize: "1.85rem" }} />
+                  </div>
                 </li>
               );
             })}

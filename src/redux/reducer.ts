@@ -205,6 +205,11 @@ export const logOut = createAsyncThunk("chatRoom/logOut", async () => {
   return true;
 });
 
+// trở ra khỏi phòng
+export const outRoom = createAsyncThunk("chatRoom/outRoom", async () => {
+  return true;
+});
+
 // reder reducer
 const reducer = createReducer(initalState, (builder) => {
   builder.addCase(login.fulfilled, (state, action) => {
@@ -252,6 +257,7 @@ const reducer = createReducer(initalState, (builder) => {
       duration: 3,
     });
     state.statusDetailRoom = false;
+    state.detailRoom = [];
   });
   builder.addCase(getRooms.fulfilled, (state, action) => {
     if (action.payload) {
@@ -275,6 +281,9 @@ const reducer = createReducer(initalState, (builder) => {
     state.statusLogin = false;
     state.statusGetUser = false;
     state.statusRoom = false;
+    state.statusDetailRoom = false;
+  });
+  builder.addCase(outRoom.fulfilled, (state, action) => {
     state.statusDetailRoom = false;
   });
 });

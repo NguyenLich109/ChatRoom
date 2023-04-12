@@ -1,40 +1,90 @@
+:root {
+  --height-search: 32px;
+  --height-room: 72px;
+}
 .navbar {
-  padding-top: 20px;
   text-align: left;
-  background-color: #0c2d48;
-  height: calc(100vh - var(--height));
+  background-color: #fff;
+  height: calc(100vh - var(--height-logo));
+  padding-top: 15px;
+  border-right: 1px solid #ccc;
 
+  .navbar-flex {
+    display: flex;
+    align-items: center;
+    padding: 0 12px 15px;
+  }
+
+  .ant-input.css-dev-only-do-not-override-mxhywb {
+    height: var(--height-search);
+    background-color: #eaedf0;
+  }
+  .ant-btn.css-dev-only-do-not-override-mxhywb.ant-btn-default.ant-btn-icon-only.ant-input-search-button {
+    background-color: #eaedf0;
+  }
+  .navbar-friend {
+    border-bottom: 1px solid #ccc;
+  }
   .navbar-friend__span {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     cursor: pointer;
-    font-weight: 600;
-    color: #fff;
-    padding-left: 10px;
+    height: var(--height-search);
+    width: var(--height-search);
   }
   .navbar-friend__span:hover {
-    color: rgba(224, 71, 24, 0.746);
+    background-color: #dfe2e7;
   }
+  .ant-btn.css-dev-only-do-not-override-mxhywb.ant-btn-text.navbar-friend__span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .navbar-list {
-    padding-top: 10px;
+    overflow-y: scroll;
+    height: calc(100vh - 84px - var(--height-logo));
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+  }
+  .navbar-list::-webkit-scrollbar {
+    width: 0;
+    display: none;
   }
   .navbar-list__span {
-    font-size: 1.9rem;
+    font-size: 1.4rem;
+    margin-left: 12px;
     font-weight: 600;
-    color: #fff;
-    padding-left: 10px;
+    color: #38a7ff;
+    border-bottom: 2px solid #38a7ff;
+    text-align: center;
   }
   .navbar-list ul {
     list-style: none;
   }
   .navbar-list li {
-    height: 40px;
-    line-height: 40px;
-    color: #fff;
+    height: var(--height-room);
     font-size: 1.6rem;
-    padding-left: 10px;
+    padding: 0 12px;
   }
   .navbar-list li:hover {
-    background-color: #201933cc;
+    background-color: #f3f5f6;
     cursor: pointer;
+  }
+  .navbar-room {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .navbar-room__titile {
+      display: flex;
+      flex-direction: column;
+    }
+    .navbar-room__titile-span {
+      padding: 2px 10px;
+    }
+    .navbar-room__titile-span:nth-child(2) {
+      font-size: 1.4rem;
+      color: #7589a3;
+    }
   }
 }

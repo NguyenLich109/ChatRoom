@@ -7,11 +7,12 @@ import {
   PlusCircleOutlined,
   FileImageOutlined,
   EllipsisOutlined,
+  LeftOutlined,
 } from "@ant-design/icons";
 import "./index.scss";
 import AddFriend from "../modal/addFriend";
 import RemoveZoom from "../modal/removeZoom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hookReudx";
 import {
   inviteFriend,
@@ -24,7 +25,7 @@ import { RoomFriend } from "../../redux/type";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Messenger() {
+export default function Messenger({ handleOutRoom }: any) {
   const dispatch = useAppDispatch();
 
   const detailRoom = useAppSelector((state) => state.chatRoom.detailRoom);
@@ -38,6 +39,7 @@ export default function Messenger() {
   const [value, setValue] = useState<string[] | undefined>();
   const [content, setContent] = useState<string>("");
   const [url, setUrl] = useState<any>("");
+  const messengeListRef: any = useRef(null);
 
   const items: any = [
     {
@@ -138,16 +140,38 @@ export default function Messenger() {
     dispatch(messageRecall({ idRoom: detailRoom.id, idMessage, nameUrl }));
   };
 
+  // back to buttom
+  useEffect(() => {
+    if (messengeListRef?.current) {
+      messengeListRef.current.scrollTop =
+        messengeListRef.current.scrollHeight + 50;
+    }
+  }, [detailRoom]);
+
   return (
     <>
       {!detailStatusRoom ? (
-        <Alert message="Hãy chọn phòng" type="info" showIcon />
+        <Alert
+          style={{ margin: "15px 10px 0px" }}
+          message="Hãy chọn phòng"
+          type="info"
+          showIcon
+        />
       ) : (
         <div className="messenger">
           <div className="messenger-header">
-            <div className="messenger-header__noti">
-              <p>{detailRoom?.nameRoom}</p>
-              <p>{detailRoom?.titleRoom}</p>
+            <div className="messenger-header__friend">
+              {" "}
+              <div
+                className="messenger-out messenger-out-icon"
+                onClick={handleOutRoom}
+              >
+                <LeftOutlined />
+              </div>
+              <div className="messenger-header__noti">
+                <p>{detailRoom?.nameRoom}</p>
+                <p>{detailRoom?.titleRoom}</p>
+              </div>
             </div>
             <div className="messenger-header__friend">
               <Button type="text" onClick={() => setCheckRemoveZoom(true)}>
@@ -182,7 +206,7 @@ export default function Messenger() {
               </Avatar.Group>
             </div>
           </div>
-          <div className="messenger-container">
+          <div className="messenger-container" ref={messengeListRef}>
             {detailRoom.messenges?.map((friend: any, index: number) => {
               return (
                 <div
@@ -205,6 +229,7 @@ export default function Messenger() {
                             nameUrl: friend.nameUrl,
                           }),
                       }}
+                      placement="topRight"
                     >
                       <EllipsisOutlined />
                     </Dropdown>
